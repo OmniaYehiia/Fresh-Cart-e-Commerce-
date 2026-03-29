@@ -1,0 +1,104 @@
+<nav class="bg-white shadow-md fixed w-full top-0 left-0 z-50 ">
+  <div class="container mx-auto flex items-center justify-between px-4 py-3">
+
+    <div routerLink="/home" class="flex items-center gap-2">
+      <img src="/images/freshcart-logo.49f1b44d.svg" alt="FreshCart Logo" class="h-8 cursor-pointer">
+    </div>
+
+    <div class="hidden md:flex flex-1 mx-8">
+      <div class="relative w-full">
+
+        <input type="text" placeholder="Search for products, brands and more..."
+          class="w-full pl-6 pr-14 py-2 rounded-full bg-gray-100 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500" />
+
+        <button
+          class="absolute right-1 top-1 bottom-1 px-4 rounded-full bg-green-600 text-white hover:bg-green-700 transition flex items-center justify-center">
+          <i class="fa-solid fa-magnifying-glass text-sm"></i>
+        </button>
+
+      </div>
+    </div>
+    <div class="flex items-center gap-6">
+      <div class="hidden md:flex items-center gap-6 text-gray-700 font-medium">
+        <a class="hover:text-green-600 cursor-pointer" routerLink="/home">Home</a>
+        <a class="hover:text-green-600 cursor-pointer" routerLink="/products">Shop</a>
+        <a class="hover:text-green-600 cursor-pointer flex items-center gap-1" routerLink="/categories">
+          Categories
+          <i class="fa-solid fa-chevron-down text-xs mt-1"></i>
+        </a>
+        <a class="hover:text-green-600 cursor-pointer" routerLink="/brands">Brands</a>
+      </div>
+
+      <div class="border-s-2 border-gray-200 flex items-center gap-6 pl-6">
+        <div class="hidden lg:flex items-center gap-2  cursor-pointer">
+          <div class="size-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+            <i class="fa-solid fa-headset"></i>
+          </div>
+          <div routerLink="/support" class="text-sm leading-tight">
+            <p class="text-gray-500">Support</p>
+            <p class="font-semibold text-gray-800">24/7 Help</p>
+          </div>
+        </div>
+        <div class="hidden md:flex items-center gap-5 text-xl text-gray-600">
+          <div routerLink="/wishlist"
+            class="size-10 rounded-full flex justify-center items-center hover:text-green-600 hover:bg-gray-100 transition cursor-pointer">
+            <i class="fa-regular fa-heart"></i>
+          </div>
+
+          <div routerLink="/cart"
+            class="relative size-10 rounded-full flex justify-center items-center hover:text-green-600 hover:bg-gray-100 transition cursor-pointer">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span
+              class="absolute top-0 right-0 bg-success-soft text-fg-success-strong text-xs font-medium px-1.5 py-0.5 rounded">{{
+              cartItems() }}</span>
+          </div>
+        </div>
+
+        @if (!isLoggedIn()) {
+        <button routerLink="/login"
+          class="hidden cursor-pointer md:flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition">
+          <i class="fa-regular fa-user"></i>
+          Sign In
+        </button>
+        }
+        @if (isLoggedIn()) {
+        <button (click)="logout()"
+          class="hidden cursor-pointer md:flex items-center gap-2 bg-transparent border-2 border-red-500 text-red-500 px-4 py-2 rounded-full hover:bg-red-500 hover:text-white transition">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </button>
+        }
+
+        <button class="md:hidden text-xl" (click)="toggleMenu()">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  @if (mobileMenuOpen()) {
+  <div class="md:hidden bg-white border-t px-4 py-4 space-y-4">
+
+    <div class="relative">
+      <input type="text" placeholder="Search..." class="w-full pl-4 pr-12 py-2 rounded-lg border border-gray-200" />
+      <button class="absolute right-1 top-1 bottom-1 px-3 rounded-lg bg-green-600 text-white">
+        <i class="fa-solid fa-magnifying-glass text-sm"></i>
+      </button>
+    </div>
+
+    <a class="block text-gray-700 font-medium">Home</a>
+    <a class="block text-gray-700 font-medium">Shop</a>
+    <a class="block text-gray-700 font-medium">Categories</a>
+    <a class="block text-gray-700 font-medium">Brands</a>
+
+    <div class="flex items-center gap-3 pt-4 border-t">
+      <i class="fa-solid fa-headset text-green-600 text-lg"></i>
+      <div>
+        <p class="text-gray-500 text-sm">Support</p>
+        <p class="font-semibold text-gray-800 text-sm">24/7 Help</p>
+      </div>
+    </div>
+
+  </div>
+  }
+</nav>
